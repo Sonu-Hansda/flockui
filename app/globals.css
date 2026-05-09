@@ -1,26 +1,81 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* Enable class-based dark mode for Tailwind v4 */
+@variant dark (&:where(.dark, .dark *));
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-flutter-navy: #042B59;
+  --color-flutter-blue: #0553B1;
+  --color-flutter-sky: #027DFD;
+  --color-flutter-red: #F25D50;
+  --color-flutter-yellow: #FFF275;
+  --color-flutter-purple: #6200EE;
+  --color-flutter-green: #1CDAC5;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+code, pre {
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+kbd {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  background: #f8fafc;
+  padding: 1px 5px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: #64748b;
+  box-shadow: 0 1px 0 #cbd5e1;
+}
+
+/* Dark mode kbd */
+.dark kbd {
+  border-color: #334155;
+  background: #1e293b;
+  color: #94a3b8;
+  box-shadow: 0 1px 0 #0f172a;
+}
+
+/* Search dialog */
+.search-dialog {
+  width: 100%;
+  max-width: 560px;
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+  overflow: hidden;
+}
+
+/* Dark mode search dialog */
+.dark .search-dialog {
+  background: #1e293b;
+  border-color: #334155;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.5);
 }
