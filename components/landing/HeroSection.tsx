@@ -23,8 +23,6 @@ export default function HeroSection() {
           opacity: 0.6,
         }}
       />
-      {/* Light mode glow */}
-      <div className="dark:hidden pointer-events-none absolute -top-24 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-flutter-sky/15 blur-3xl" />
       {/* Dark mode glow */}
       <div className="hidden dark:block pointer-events-none absolute -top-24 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-flutter-blue/25 blur-3xl" />
 
