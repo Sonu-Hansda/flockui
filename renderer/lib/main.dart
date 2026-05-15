@@ -1,0 +1,25 @@
+import 'package:flutter/material.dart';
+import 'component.dart';
+
+void main() => runApp(const PreviewApp());
+
+class PreviewApp extends StatelessWidget {
+  const PreviewApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorSchemeSeed: const Color(0xFF4F46E5),
+        useMaterial3: true,
+      ),
+      home: const Scaffold(
+        backgroundColor: Color(0xFFF8F8F7),
+        body: Center(
+          child: PreviewComponent(),
+        ),
+      ),
+    );
+  }
+}
