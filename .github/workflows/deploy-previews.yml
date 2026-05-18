@@ -1,0 +1,60 @@
+name: Deploy Previews
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'registry/**/*.dart'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v42
+        with:
+          files: registry/**/*.dart
+
+      - name: Render and Upload Previews
+        if: steps.changed-files.outputs.any_changed == 'true'
+        shell: pwsh
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_BUCKET_NAME: ${{ secrets.R2_BUCKET_NAME }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: |
+          $changedFiles = "${{ steps.changed-files.outputs.all_changed_files }}"
+          $files = $changedFiles -split ' '
+          $componentsToBuild = @{}
+          
+          foreach ($file in $files) {
+            # File is like: registry/button/default/button_default.dart
+            $parts = $file -split '/'
+            if ($parts.Length -ge 4 -and $parts[0] -eq 'registry') {
+              $Component = $parts[1]
+              $Variant = $parts[2]
+              $key = "$Component/$Variant"
+              $componentsToBuild[$key] = @{ Component = $Component; Variant = $Variant }
+            }
+          }
+          
+          if ($componentsToBuild.Count -eq 0) {
+            Write-Host "No components to build."
+            exit 0
+          }
+          
+          foreach ($item in $componentsToBuild.Values) {
+            Write-Host "Triggering build for Component: $($item.Component), Variant: $($item.Variant)"
+            ./scripts/render_previews.ps1 -Component $item.Component -Variant $item.Variant -PushToR2 $true
+          }
