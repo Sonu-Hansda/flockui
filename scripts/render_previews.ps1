@@ -1,7 +1,8 @@
 # Get Component and Variant name
 param(
     [string]$Component = "",
-    [string]$Variant = ""
+    [string]$Variant = "",
+    [bool]$PushToR2 = $false
 )
 
 # Function to get environment variables
@@ -33,9 +34,14 @@ $Root         = Split-Path -Parent $PSScriptRoot
 $RendererPath = Join-Path $Root "renderer"
 $RegistryPath = Join-Path $Root "registry"
 $BuildTemp    = Join-Path $Root "build-temp"
+$PublicPath   = Join-Path $Root "public/previews"
 $EnvPath      = Join-Path $Root ".env.local"
 
-$envContent = Get-Content $EnvPath
+if (Test-Path $EnvPath) {
+    $envContent = Get-Content $EnvPath
+} else {
+    $envContent = @()
+}
 
 # Safety check if the component or variant is not passed
 if (-not $Component -or -not $Variant) {
@@ -43,7 +49,7 @@ if (-not $Component -or -not $Variant) {
     exit 1
 }
 
-$SourceFile = Join-Path $RegistryPath "$Component\$Variant\${Component}_${Variant}.dart"
+$SourceFile = Join-Path $RegistryPath "$Component/$Variant/${Component}_${Variant}.dart"
 
 if (-not (Test-Path $SourceFile)) {
     Write-Error "Component source file not found: $SourceFile"
@@ -54,34 +60,57 @@ $RendererTarget = Join-Path $RendererPath "lib\component.dart"
 
 Copy-Item $SourceFile $RendererTarget -Force
 
-$OutputPath = Join-Path $BuildTemp "$Component\$Variant"
-
-# Get environment variables
-if (Test-Path $EnvPath) {
-    $R2AccountId = Get-EnvValue "R2_ACCOUNT_ID"
-    $R2BucketName = Get-EnvValue "R2_BUCKET_NAME"
-    $R2AccessKey = Get-EnvValue "R2_ACCESS_KEY_ID"
-    $R2SecretKey = Get-EnvValue "R2_SECRET_ACCESS_KEY"
+if ($PushToR2) {
+    $OutputPath = Join-Path $BuildTemp "$Component/$Variant"
+    
+    # Get environment variables for R2
+    if (Test-Path $EnvPath) {
+        $R2AccountId = Get-EnvValue "R2_ACCOUNT_ID"
+        $R2BucketName = Get-EnvValue "R2_BUCKET_NAME"
+        $R2AccessKey = Get-EnvValue "R2_ACCESS_KEY_ID"
+        $R2SecretKey = Get-EnvValue "R2_SECRET_ACCESS_KEY"
+    } else {
+        Write-Host "Warning: .env.local file NOT found! R2 upload may fail if variables are not in the environment."
+    }
 } else {
-    Write-Host ".env.local file NOT found!"
+    $OutputPath = Join-Path $PublicPath "$Component/$Variant"
 }
 
 Push-Location $RendererPath
 
 # Build the component
 try {
+    Write-Host "Building Flutter web component for $Component ($Variant)..."
     flutter build web --release --output $OutputPath --base-href "/previews/$Component/$Variant/"
 }
 finally {
     Pop-Location
 }
 
-# Upload the built component to R2
-$env:AWS_ACCESS_KEY_ID = $R2AccessKey
-$env:AWS_SECRET_ACCESS_KEY = $R2SecretKey
-
-$BucketPath = "s3://$R2BucketName/previews/$Component/$Variant"
-
-aws s3 sync $OutputPath $BucketPath `
-    --endpoint-url "https://$R2AccountId.r2.cloudflarestorage.com" `
-    --no-progress
+if ($PushToR2) {
+    Write-Host "Uploading the built component to R2..."
+    
+    if ($R2AccessKey) { $env:AWS_ACCESS_KEY_ID = $R2AccessKey }
+    if ($R2SecretKey) { $env:AWS_SECRET_ACCESS_KEY = $R2SecretKey }
+    
+    $BucketPath = "s3://$R2BucketName/previews/$Component/$Variant"
+    
+    # If variables are not loaded from .env.local, AWS CLI will attempt to use default environment variables (e.g. from GitHub Actions)
+    if ($R2AccountId) {
+        $EndpointUrl = "https://$R2AccountId.r2.cloudflarestorage.com"
+        aws s3 sync $OutputPath $BucketPath --endpoint-url $EndpointUrl --no-progress
+    } else {
+        # Fallback if endpoint URL is constructed from existing env var
+        $EnvAccountId = $env:R2_ACCOUNT_ID
+        if ($EnvAccountId) {
+            $EndpointUrl = "https://$EnvAccountId.r2.cloudflarestorage.com"
+            aws s3 sync $OutputPath $BucketPath --endpoint-url $EndpointUrl --no-progress
+        } else {
+            Write-Error "Missing R2 Account ID. Cannot upload to R2."
+            exit 1
+        }
+    }
+    Write-Host "Successfully uploaded to R2!"
+} else {
+    Write-Host "Local build complete! Preview is available at: public/previews/$Component/$Variant/"
+}
