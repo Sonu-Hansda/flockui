@@ -16,7 +16,7 @@ class _PreviewComponentState extends State<PreviewComponent> {
       SnackBar(
         content: Text(message),
         behavior: SnackBarBehavior.floating,
-        duration: const Duration(seconds: 2),
+        duration: const Duration(seconds: 3),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
