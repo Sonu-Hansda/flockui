@@ -27,34 +27,22 @@ jobs:
 
       - name: Render and Upload Previews
         if: steps.changed-files.outputs.any_changed == 'true'
-        shell: pwsh
         env:
           R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
           R2_BUCKET_NAME: ${{ secrets.R2_BUCKET_NAME }}
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
         run: |
-          $changedFiles = "${{ steps.changed-files.outputs.all_changed_files }}"
-          $files = $changedFiles -split ' '
-          $componentsToBuild = @{}
+          changedFiles="${{ steps.changed-files.outputs.all_changed_files }}"
           
-          foreach ($file in $files) {
-            # File is like: registry/button/default/button_default.dart
-            $parts = $file -split '/'
-            if ($parts.Length -ge 4 -and $parts[0] -eq 'registry') {
-              $Component = $parts[1]
-              $Variant = $parts[2]
-              $key = "$Component/$Variant"
-              $componentsToBuild[$key] = @{ Component = $Component; Variant = $Variant }
-            }
-          }
-          
-          if ($componentsToBuild.Count -eq 0) {
-            Write-Host "No components to build."
-            exit 0
-          }
-          
-          foreach ($item in $componentsToBuild.Values) {
-            Write-Host "Triggering build for Component: $($item.Component), Variant: $($item.Variant)"
-            ./scripts/render_previews.ps1 -Component $item.Component -Variant $item.Variant -PushToR2 $true
-          }
+          # Read changed files dynamically using bash
+          for file in $changedFiles; do
+            if [[ $file == registry/*/*/* ]]; then
+              IFS='/' read -ra PARTS <<< "$file"
+              Component="${PARTS[1]}"
+              Variant="${PARTS[2]}"
+              
+              echo "Triggering build for Component: $Component, Variant: $Variant"
+              node ./scripts/render_previews.mjs --Component "$Component" --Variant "$Variant" --PushToR2 true
+            fi
+          done
