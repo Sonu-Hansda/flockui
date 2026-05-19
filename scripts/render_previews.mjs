@@ -1,0 +1,137 @@
+import fs from 'fs';
+import path from 'path';
+import { execSync } from 'child_process';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const Root = path.resolve(__dirname, '..');
+
+// Simple argument parser
+const args = process.argv.slice(2);
+let Component = '';
+let Variant = '';
+let PushToR2 = false;
+
+for (let i = 0; i < args.length; i++) {
+  const arg = args[i].toLowerCase();
+  if (arg === '-component' || arg === '--component') {
+    Component = args[i + 1];
+    i++;
+  } else if (arg === '-variant' || arg === '--variant') {
+    Variant = args[i + 1];
+    i++;
+  } else if (arg === '-pushtor2' || arg === '--pushtor2') {
+    if (args[i + 1] === 'true' || args[i + 1] === '$true') {
+      PushToR2 = true;
+      i++;
+    } else if (args[i + 1] === 'false' || args[i + 1] === '$false') {
+      PushToR2 = false;
+      i++;
+    } else {
+      PushToR2 = true; 
+    }
+  }
+}
+
+if (!Component || !Variant) {
+  console.error("Error: Both -Component and -Variant are required");
+  process.exit(1);
+}
+
+// Function to get environment variables
+const EnvPath = path.join(Root, '.env.local');
+let envContent = '';
+if (fs.existsSync(EnvPath)) {
+  envContent = fs.readFileSync(EnvPath, 'utf8');
+} else if (!process.env.CI) {
+  console.warn("Warning: .env.local file NOT found! R2 upload may fail if variables are not in the environment.");
+}
+
+function getEnvValue(key) {
+  const regex = new RegExp(`^${key}=(.*)$`, 'm');
+  const match = envContent.match(regex);
+  if (match) {
+    let value = match[1].trim();
+    if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+      value = value.substring(1, value.length - 1);
+    }
+    return value;
+  }
+  return process.env[key] || null;
+}
+
+const RendererPath = path.join(Root, 'renderer');
+const RegistryPath = path.join(Root, 'registry');
+const BuildTemp = path.join(Root, 'build-temp');
+const PublicPath = path.join(Root, 'public', 'previews');
+
+const SourceFile = path.join(RegistryPath, Component, Variant, `${Component}_${Variant}.dart`);
+
+if (!fs.existsSync(SourceFile)) {
+  console.error(`Error: Component source file not found: ${SourceFile}`);
+  process.exit(1);
+}
+
+const RendererTarget = path.join(RendererPath, 'lib', 'component.dart');
+
+// Ensure parent directory exists for safety
+if (!fs.existsSync(path.dirname(RendererTarget))) {
+    fs.mkdirSync(path.dirname(RendererTarget), { recursive: true });
+}
+fs.copyFileSync(SourceFile, RendererTarget);
+
+let OutputPath;
+
+if (PushToR2) {
+  OutputPath = path.join(BuildTemp, Component, Variant);
+} else {
+  OutputPath = path.join(PublicPath, Component, Variant);
+}
+
+// Build the component
+try {
+  console.log(`Building Flutter web component for ${Component} (${Variant})...`);
+  const baseHref = `/previews/${Component}/${Variant}/`;
+  const flutterCmd = `flutter build web --release --output "${OutputPath}" --base-href "${baseHref}"`;
+  execSync(flutterCmd, { cwd: RendererPath, stdio: 'inherit' });
+} catch (error) {
+  console.error(`Error building component: ${error.message}`);
+  process.exit(1);
+}
+
+if (PushToR2) {
+  console.log("Uploading the built component to R2...");
+  
+  const R2AccountId = getEnvValue("R2_ACCOUNT_ID");
+  const R2BucketName = getEnvValue("R2_BUCKET_NAME");
+  const R2AccessKey = getEnvValue("R2_ACCESS_KEY_ID") || getEnvValue("AWS_ACCESS_KEY_ID");
+  const R2SecretKey = getEnvValue("R2_SECRET_ACCESS_KEY") || getEnvValue("AWS_SECRET_ACCESS_KEY");
+  
+  if (!R2AccountId) {
+    console.error("Missing R2 Account ID. Cannot upload to R2.");
+    process.exit(1);
+  }
+  if (!R2BucketName) {
+    console.error("Missing R2 Bucket Name. Cannot upload to R2.");
+    process.exit(1);
+  }
+
+  const env = { ...process.env };
+  if (R2AccessKey) env.AWS_ACCESS_KEY_ID = R2AccessKey;
+  if (R2SecretKey) env.AWS_SECRET_ACCESS_KEY = R2SecretKey;
+
+  const BucketPath = `s3://${R2BucketName}/previews/${Component}/${Variant}`;
+  const EndpointUrl = `https://${R2AccountId}.r2.cloudflarestorage.com`;
+
+  try {
+    const awsCmd = `aws s3 sync "${OutputPath}" "${BucketPath}" --endpoint-url "${EndpointUrl}" --no-progress`;
+    execSync(awsCmd, { env, stdio: 'inherit' });
+    console.log("Successfully uploaded to R2!");
+  } catch (error) {
+    console.error(`Error uploading to R2: ${error.message}`);
+    process.exit(1);
+  }
+} else {
+  console.log(`Local build complete! Preview is available at: public/previews/${Component}/${Variant}/`);
+}

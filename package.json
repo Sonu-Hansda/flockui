@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "render": "powershell -ExecutionPolicy Bypass -File scripts/render_previews.ps1"
+    "render": "node scripts/render_previews.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
