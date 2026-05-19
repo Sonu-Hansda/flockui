@@ -2,6 +2,7 @@ import { ChevronRight } from "lucide-react";
 import fs from "fs";
 import path from "path";
 import Link from "next/link";
+import { componentMeta } from "@/lib/component-meta";
 
 function getRegistryComponents() {
   const registryPath = path.join(process.cwd(), "registry");
@@ -20,75 +21,11 @@ function getRegistryComponents() {
     return { slug: component, variantCount: variants.length };
   });
 }
-const componentMeta: Record<
-  string,
-  {
-    name: string;
-    tag: string;
-    color: string;
-  }
-> = {
-  button: {
-    name: "Buttons",
-    tag: "Elements",
-    color:
-      "bg-flutter-blue/10 text-flutter-blue border-flutter-blue/20",
-  },
-  card: {
-    name: "Cards",
-    tag: "Layout",
-    color:
-      "bg-flutter-purple/10 text-flutter-purple border-flutter-purple/20",
-  },
-  textfield: {
-    name: "Text Fields",
-    tag: "Forms",
-    color:
-      "bg-flutter-red/10 text-flutter-red border-flutter-red/20",
-  },
-  navigation: {
-    name: "Navigation",
-    tag: "Structure",
-    color:
-      "bg-flutter-green/10 text-flutter-green border-flutter-green/20",
-  },
-  modal: {
-    name: "Modals",
-    tag: "Overlays",
-    color:
-      "bg-flutter-sky/10 text-flutter-sky border-flutter-sky/20",
-  },
-  avatar: {
-    name: "Avatars",
-    tag: "Elements",
-    color:
-      "bg-flutter-navy/10 text-flutter-navy border-flutter-navy/20",
-  },
-  badge: {
-    name: "Badges & Chips",
-    tag: "Elements",
-    color:
-      "bg-flutter-blue/10 text-flutter-blue border-flutter-blue/20",
-  },
-  bottomsheet: {
-    name: "Bottom Sheets",
-    tag: "Overlays",
-    color:
-      "bg-flutter-purple/10 text-flutter-purple border-flutter-purple/20",
-  },
-  progress: {
-    name: "Progress Bars",
-    tag: "Feedback",
-    color:
-      "bg-flutter-green/10 text-flutter-green border-flutter-green/20",
-  },
-};
+
 
 export default function ComponentsPage() {
   const registryComponents = getRegistryComponents();
 
-  // merge registry data with static metadata
-  // if no metadata found fall back to the slug itself
   const categories = registryComponents.map((comp) => {
     const meta = componentMeta[comp.slug] ?? {
       name: comp.slug.charAt(0).toUpperCase() + comp.slug.slice(1),
@@ -128,7 +65,6 @@ export default function ComponentsPage() {
 
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         {categories.length === 0 ? (
-          // empty state — shown when registry folder is empty
           <div className="text-center py-24">
             <p className="text-slate-400 dark:text-slate-500 text-sm">
               No components in registry yet.
