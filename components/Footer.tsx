@@ -37,9 +37,13 @@ export default function Footer() {
               An open-source library of copy-paste Flutter UI components. Build beautiful apps faster without heavy dependencies.
             </p>
             <div className="mt-6 flex gap-3">
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer"
+              <a href="https://github.com/Sonu-Hansda/flockui" target="_blank" rel="noopener noreferrer"
                 className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:border-flutter-blue hover:text-flutter-blue transition-colors">
                 <FaGithub className="h-4 w-4" />
+              </a>
+              <a href="https://ko-fi.com/sonuhansda" target="_blank" rel="noopener noreferrer"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:border-flutter-blue hover:text-flutter-blue transition-colors">
+                <img src="https://storage.ko-fi.com/cdn/logomarkLogo.png" alt="Ko-fi" className="h-4 w-4" />
               </a>
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"
                 className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:border-flutter-blue hover:text-flutter-blue transition-colors">
