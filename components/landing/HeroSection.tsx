@@ -4,7 +4,6 @@ import { ArrowRight, Code2 } from "lucide-react";
 export default function HeroSection() {
   return (
     <section className="relative w-full overflow-hidden bg-white dark:bg-slate-900 pt-24 pb-32 sm:pt-28 sm:pb-36 transition-colors duration-200">
-      {/* Animated gradient mesh background */}
       <div className="pointer-events-none absolute inset-0 opacity-[0.04] dark:opacity-[0.06]">
         <div
           className="absolute inset-0 animate-gradient"
@@ -16,7 +15,6 @@ export default function HeroSection() {
         />
       </div>
 
-      {/* Light mode subtle grain */}
       <div
         className="dark:hidden pointer-events-none absolute inset-0"
         style={{
@@ -26,18 +24,15 @@ export default function HeroSection() {
         }}
       />
 
-      {/* Dark mode — clean radial depth instead of grain */}
       <div className="hidden dark:block pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(2,125,253,0.08)_0%,transparent_60%)]" />
 
-      {/* Floating glowing orb — brighter in dark mode */}
       <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <div className="relative h-[500px] w-[500px] sm:h-[600px] sm:w-[600px]">
-          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-flutter-sky/25 via-flutter-purple/20 to-accent-cyan/25 blur-3xl animate-pulse-soft dark:from-flutter-sky/30 dark:via-flutter-purple/25 dark:to-accent-cyan/30" />
-          <div className="absolute inset-[15%] rounded-full bg-gradient-to-br from-flutter-sky/15 via-flutter-blue/10 to-transparent blur-2xl animate-float-slow dark:from-flutter-sky/20 dark:via-flutter-blue/15" />
+        <div className="relative h-125 w-125 sm:h-150 sm:w-150">
+          <div className="absolute inset-0 rounded-full bg-linear-to-br from-flutter-sky/25 via-flutter-purple/20 to-accent-cyan/25 blur-3xl animate-pulse-soft dark:from-flutter-sky/30 dark:via-flutter-purple/25 dark:to-accent-cyan/30" />
+          <div className="absolute inset-[15%] rounded-full bg-linear-to-br from-flutter-sky/15 via-flutter-blue/10 to-transparent blur-2xl animate-float-slow dark:from-flutter-sky/20 dark:via-flutter-blue/15" />
         </div>
       </div>
 
-      {/* Decorative floating elements */}
       <div className="pointer-events-none absolute right-[10%] top-[20%] hidden sm:block">
         <div className="h-16 w-16 rounded-full border border-flutter-sky/10 bg-flutter-sky/5 blur-sm animate-float-delayed dark:border-flutter-sky/20 dark:bg-flutter-sky/10" />
       </div>
@@ -74,7 +69,7 @@ export default function HeroSection() {
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </Link>
           <Link
-            href="/docs"
+            href="/docs/contribution"
             className="group inline-flex h-12 items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm px-7 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:border-slate-300 dark:hover:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all hover:-translate-y-0.5 shadow-sm"
           >
             <Code2 className="h-4 w-4" />
@@ -82,7 +77,6 @@ export default function HeroSection() {
           </Link>
         </div>
 
-        {/* Social proof */}
         <div className="mt-12 flex items-center justify-center gap-6 sm:gap-10">
           <p className="text-sm text-slate-400 dark:text-slate-500 font-medium">
             Free forever &middot; MIT License

@@ -1,4 +1,5 @@
-import { Check } from "lucide-react";
+import { Check, ExternalLink } from "lucide-react";
+import Link from "next/link";
 import DocsSidebar from "@/components/docs/DocsSidebar";
 
 const codeSnippet = `// example_button.dart
@@ -73,6 +74,20 @@ export default function DocsPage() {
             <pre className="overflow-x-auto px-5 py-4 text-sm leading-relaxed text-slate-200 font-mono">
               <code>{codeSnippet}</code>
             </pre>
+          </div>
+
+          {/* Contributing section */}
+          <div className="mt-12 rounded-2xl border border-flutter-blue/20 dark:border-flutter-sky/20 bg-flutter-blue/5 dark:bg-flutter-sky/5 p-6">
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Want to Contribute?</h3>
+            <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+              FlockUI is open source and we welcome contributions from the community. Whether it's a new component, a bug fix, or a documentation improvement — every contribution helps.
+            </p>
+            <Link
+              href="/docs/contribution"
+              className="inline-flex items-center gap-2 rounded-lg bg-flutter-blue dark:bg-flutter-sky text-white px-5 py-2.5 text-sm font-semibold hover:opacity-90 transition-opacity"
+            >
+              Read the Contribution Guide <ExternalLink className="h-4 w-4" />
+            </Link>
           </div>
         </div>
       </div>
