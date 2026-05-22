@@ -1,3 +1,14 @@
+// FlockUI Component: Button (Default)
+// Description: A versatile button widget with multiple variants, sizes, and interactive states.
+// Category: Elements
+// External Dependencies: none
+//
+// This is a template component. When creating new components, follow this structure:
+// 1. Add header comments describing your component
+// 2. The class MUST be named `PreviewComponent` and extend `StatefulWidget`
+// 3. If using external packages, list them in the header comments above
+// 4. Keep the entire component in a single .dart file
+
 import 'package:flutter/material.dart';
 
 class PreviewComponent extends StatefulWidget {
