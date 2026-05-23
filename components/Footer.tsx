@@ -11,10 +11,7 @@ const footerLinks = {
     { label: "Overlays", href: "/components" },
   ],
   Documentation: [
-    { label: "Introduction", href: "/docs" },
-    { label: "Installation", href: "/docs" },
-    { label: "Theming", href: "/docs" },
-    { label: "Accessibility", href: "/docs" },
+    { label: "Contribution", href: "/docs/contribution" },
   ],
   Legal: [
     { label: "Terms of Service", href: "/terms" },
