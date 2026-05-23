@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Monitor, Smartphone } from 'lucide-react'
+import { Monitor, Smartphone, ExternalLink } from 'lucide-react'
 import { getPreviewUrl } from '@/lib/get-preview-url'
 
 const platforms = [
@@ -42,29 +42,52 @@ export default function ComponentPreview({
         )
     }
 
+    const openLivePreview = () => {
+        const url = new URL(src, window.location.origin)
+        url.searchParams.set('platform', activePlatform)
+        window.open(url.toString(), '_blank', 'noopener,noreferrer')
+    }
+
     return (
         <div className="flex flex-col gap-3">
 
-            {/* Platform switcher */}
-            <div className="flex items-center gap-1 bg-slate-100
-                      dark:bg-slate-800 rounded-lg p-1 w-fit">
-                {platforms.map((p) => {
-                    const Icon = p.icon
-                    const isActive = activePlatform === p.id
-                    return (
-                        <button
-                            key={p.id}
-                            onClick={() => setActivePlatform(p.id)}
-                            title={p.label}
-                            className={`p-2 rounded-md transition-all duration-200 ${isActive
-                                ? 'bg-white dark:bg-slate-700 text-flutter-blue shadow-sm'
-                                : 'text-slate-400 hover:text-slate-600'
-                                }`}
-                        >
-                            <Icon className="h-4 w-4" />
-                        </button>
-                    )
-                })}
+            {/* Platform switcher + Live Preview button */}
+            <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1 bg-slate-100
+                          dark:bg-slate-800 rounded-lg p-1 w-fit">
+                    {platforms.map((p) => {
+                        const Icon = p.icon
+                        const isActive = activePlatform === p.id
+                        return (
+                            <button
+                                key={p.id}
+                                onClick={() => setActivePlatform(p.id)}
+                                title={p.label}
+                                className={`p-2 rounded-md transition-all duration-200 ${isActive
+                                    ? 'bg-white dark:bg-slate-700 text-flutter-blue shadow-sm'
+                                    : 'text-slate-400 hover:text-slate-600'
+                                    }`}
+                            >
+                                <Icon className="h-4 w-4" />
+                            </button>
+                        )
+                    })}
+                </div>
+
+                {/* Live Preview button */}
+                <button
+                    onClick={openLivePreview}
+                    title="Open live preview in new tab"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium
+                        text-flutter-blue dark:text-flutter-sky
+                        bg-flutter-blue/5 dark:bg-flutter-sky/5
+                        border border-flutter-blue/20 dark:border-flutter-sky/20
+                        hover:bg-flutter-blue/10 dark:hover:bg-flutter-sky/10
+                        transition-all duration-200"
+                >
+                    <ExternalLink className="h-3.5 w-3.5" />
+                    Live Preview
+                </button>
             </div>
 
             {/* Preview window */}
