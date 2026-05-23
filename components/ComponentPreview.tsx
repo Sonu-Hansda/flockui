@@ -83,11 +83,6 @@ export default function ComponentPreview({
                                 bg-white dark:bg-slate-900 shadow-2xl overflow-hidden"
                             style={{ height: '560px' }}>
 
-                            {/* Notch / Dynamic Island */}
-                            <div className="absolute top-3 left-1/2 -translate-x-1/2
-                                    w-20 h-5 bg-slate-800 dark:bg-slate-600
-                                    rounded-full z-10" />
-
                             {/* Side buttons — purely decorative */}
                             <div className="absolute -right-[10px] top-24 w-[4px] h-12
                                     bg-slate-700 dark:bg-slate-500 rounded-r-full" />
