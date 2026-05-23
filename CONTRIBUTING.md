@@ -38,8 +38,6 @@ Before you start contributing, make sure you have the following installed:
 | **Git** | Any recent version | Version control |
 
 > **Note:** You do **not** need AWS CLI or any Cloudflare R2 credentials to contribute. The CI/CD pipeline handles deployment automatically when your PR is merged.
->
-> **Note:** The `renderer/` directory (Flutter web project) is **not tracked in git** — it's only used for local preview builds. The CI/CD pipeline has its own renderer setup. When you run `npm run render`, it uses the local `renderer/` folder on your machine.
 
 ---
 

@@ -33,8 +33,17 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
-# renderer (Flutter project - CI/CD handles builds)
-/renderer/
+# renderer - ignore generated/build artifacts only
+/renderer/build/
+/renderer/.dart_tool/
+/renderer/lib/component.dart
+/renderer/pubspec.lock
+/renderer/.metadata
+/renderer/android/
+/renderer/ios/
+/renderer/linux/
+/renderer/macos/
+/renderer/windows/
 
 # vercel
 .vercel
