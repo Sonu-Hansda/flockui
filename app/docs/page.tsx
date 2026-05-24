@@ -1,6 +1,12 @@
 import { Check, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import DocsSidebar from "@/components/docs/DocsSidebar";
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Documentation | FlockUI",
+  description: "Learn how to use FlockUI — the open-source Flutter UI component library. Get started with copy-paste Flutter widgets.",
+};
 
 const codeSnippet = `// example_button.dart
 import 'package:flutter/material.dart';

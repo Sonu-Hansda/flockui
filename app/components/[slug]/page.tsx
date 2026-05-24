@@ -5,6 +5,17 @@ import { codeToHtml } from 'shiki'
 import { getComponentCode } from '@/lib/get-component-code'
 import { componentMeta } from '@/lib/component-meta'
 import ComponentPageClient from './ComponentPageClient'
+import type { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const meta = componentMeta[slug];
+  const name = meta?.name ?? slug.charAt(0).toUpperCase() + slug.slice(1);
+  return {
+    title: `${name} | FlockUI`,
+    description: meta?.description ?? `${name} Flutter UI component — preview, copy, and paste into your project.`,
+  };
+}
 
 export default async function ComponentPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params

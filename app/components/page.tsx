@@ -1,4 +1,10 @@
 import { ChevronRight } from "lucide-react";
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Components | FlockUI",
+  description: "Browse all available Flutter UI components. Preview, copy, and paste high-quality widgets into your Flutter apps.",
+};
 import fs from "fs";
 import path from "path";
 import Link from "next/link";

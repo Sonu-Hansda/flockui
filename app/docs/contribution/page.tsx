@@ -4,6 +4,12 @@ import ContributionSteps from "@/components/docs/ContributionSteps";
 import ContributionPrereqs from "@/components/docs/ContributionPrereqs";
 import ContributionGuide from "@/components/docs/ContributionGuide";
 import ContributionRules from "@/components/docs/ContributionRules";
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Contributing | FlockUI",
+  description: "Learn how to contribute Flutter components to FlockUI. Step-by-step guide for adding new widgets.",
+};
 
 export default function ContributionPage() {
   return (

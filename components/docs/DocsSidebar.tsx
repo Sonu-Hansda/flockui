@@ -1,13 +1,21 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 const sidebarLinks = [
   {
     group: "Getting Started",
     items: [
-      { label: "Introduction", href: "/docs/contribution", active: true },
+      { label: "Introduction", href: "/docs" },
+      { label: "Contributing", href: "/docs/contribution" },
     ],
   },
 ];
 
 export default function DocsSidebar() {
+  const pathname = usePathname();
+
   return (
     <aside className="w-full md:w-60 shrink-0">
       <nav className="sticky top-24 space-y-8">
@@ -18,14 +26,11 @@ export default function DocsSidebar() {
             </p>
             <ul className="space-y-1">
               {section.items.map((item) => {
-                // Determine if this link is active based on current path
-                const isActive =
-                  (typeof window !== "undefined" && window.location.pathname === item.href) ||
-                  item.active;
+                const isActive = pathname === item.href;
 
                 return (
                   <li key={item.label}>
-                    <a
+                    <Link
                       href={item.href}
                       className={`block rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
                         isActive
@@ -34,7 +39,7 @@ export default function DocsSidebar() {
                       }`}
                     >
                       {item.label}
-                    </a>
+                    </Link>
                   </li>
                 );
               })}

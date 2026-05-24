@@ -1,16 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
-import { FaGithub, FaXTwitter } from "react-icons/fa6";
+import { FaGithub } from "react-icons/fa6";
 
 const footerLinks = {
   Components: [
-    { label: "Buttons", href: "/components" },
-    { label: "Cards", href: "/components" },
-    { label: "Forms & Inputs", href: "/components" },
-    { label: "Navigation", href: "/components" },
-    { label: "Overlays", href: "/components" },
+    { label: "Buttons", href: "/components/button" },
+    { label: "Navigation", href: "/components/navigation" },
+    { label: "Toasts", href: "/components/toast" },
   ],
   Documentation: [
+    { label: "Getting Started", href: "/docs" },
     { label: "Contribution", href: "/docs/contribution" },
   ],
   Legal: [
@@ -42,10 +41,6 @@ export default function Footer() {
               <a href="https://ko-fi.com/sonuhansda" target="_blank" rel="noopener noreferrer"
                 className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:border-flutter-blue hover:text-flutter-blue transition-colors">
                 <img src="https://storage.ko-fi.com/cdn/logomarkLogo.png" alt="Ko-fi" className="h-4 w-4" />
-              </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:border-flutter-blue hover:text-flutter-blue transition-colors">
-                <FaXTwitter className="h-4 w-4" />
               </a>
             </div>
           </div>

@@ -4,13 +4,14 @@ import { useState, useEffect, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { Search, ChevronRight } from "lucide-react";
 
+import Link from "next/link";
+
 const links = [
-  { label: "Buttons", href: "/components/buttons", category: "Components" },
-  { label: "Cards", href: "/components/cards", category: "Components" },
-  { label: "Inputs", href: "/components/inputs", category: "Components" },
-  { label: "Navbars", href: "/components/navbars", category: "Components" },
-  { label: "Introduction", href: "/docs", category: "Docs" },
-  { label: "Installation", href: "/docs/installation", category: "Docs" },
+  { label: "Buttons", href: "/components/button", category: "Components" },
+  { label: "Navigation", href: "/components/navigation", category: "Components" },
+  { label: "Toasts", href: "/components/toast", category: "Components" },
+  { label: "Getting Started", href: "/docs", category: "Docs" },
+  { label: "Contributing", href: "/docs/contribution", category: "Docs" },
 ];
 
 export default function SearchModal() {
@@ -74,7 +75,7 @@ export default function SearchModal() {
             <p className="px-4 py-6 text-center text-sm text-slate-400 dark:text-slate-500">No results found.</p>
           ) : (
             filtered.map((item) => (
-              <a
+              <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
@@ -82,7 +83,7 @@ export default function SearchModal() {
               >
                 <span className="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-flutter-blue dark:group-hover:text-flutter-sky">{item.label}</span>
                 <span className="text-xs text-slate-400 dark:text-slate-500 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded-full">{item.category}</span>
-              </a>
+              </Link>
             ))
           )}
         </div>

@@ -121,6 +121,7 @@ export default function ComponentPreview({
                                 src={src}
                                 className="w-full h-full border-none"
                                 title={`${component} ${variant} preview`}
+                                sandbox="allow-scripts allow-same-origin"
                             />
                         </div>
                     </div>
@@ -134,6 +135,7 @@ export default function ComponentPreview({
                             className="w-full border-none"
                             style={{ minHeight: '420px' }}
                             title={`${component} ${variant} preview`}
+                            sandbox="allow-scripts allow-same-origin"
                         />
                     </div>
                 )}

@@ -73,12 +73,10 @@ export default function FeaturesSection() {
                   ? "lg:col-span-4"
                   : "lg:col-span-1";
 
-            const rowSpan = f.size === "wide" ? "" : "";
-
             return (
               <ScrollReveal key={f.title} delay={i + 1}>
                 <div
-                  className={`group relative rounded-2xl border border-slate-200 dark:border-slate-700/80 bg-white dark:bg-slate-800/60 p-6 sm:p-7 hover:shadow-lg hover:border-slate-300 dark:hover:border-slate-600 hover:-translate-y-0.5 transition-all overflow-hidden ${colSpan} ${rowSpan}`}
+                  className={`group relative rounded-2xl border border-slate-200 dark:border-slate-700/80 bg-white dark:bg-slate-800/60 p-6 sm:p-7 hover:shadow-lg hover:border-slate-300 dark:hover:border-slate-600 hover:-translate-y-0.5 transition-all overflow-hidden ${colSpan}`}
                 >
                   {/* Gradient overlay */}
                   <div

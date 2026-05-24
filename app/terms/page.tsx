@@ -1,3 +1,10 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Terms of Service | FlockUI",
+  description: "Terms of Service for using FlockUI platform and components.",
+};
+
 export default function TermsPage() {
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-200">
@@ -12,7 +19,7 @@ export default function TermsPage() {
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <div className="prose prose-slate dark:prose-invert max-w-none">
           <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">
-            Last updated: {new Date().toLocaleDateString("en-IN")}
+            Last updated: 24 May 2026
           </p>
 
           <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white mt-10 mb-4">1. Acceptance of Terms</h2>
