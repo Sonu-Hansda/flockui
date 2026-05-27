@@ -2,21 +2,17 @@
 
 import { useState } from 'react'
 import { Check, Copy } from 'lucide-react'
-import { useTheme } from '@/components/ThemeProvider'
 
 export default function CodeBlock({
     code,
-    highlightedDark,
     highlightedLight,
 }: {
     code: string
-    highlightedDark: string
     highlightedLight: string
 }) {
     const [copied, setCopied] = useState(false)
-    const { theme } = useTheme()
 
-    const highlightedCode = theme === 'dark' ? highlightedDark : highlightedLight
+    const highlightedCode = highlightedLight
 
     const handleCopy = async () => {
         try {
