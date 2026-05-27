@@ -93,7 +93,6 @@ export default function ComponentPageClient({
                         <div className="flex-1 flex flex-col">
                             <CodeBlock
                                 code={current.code}
-                                highlightedDark={current.highlightedDark}
                                 highlightedLight={current.highlightedLight}
                             />
                         </div>
