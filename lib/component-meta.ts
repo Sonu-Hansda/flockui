@@ -66,5 +66,5 @@ export const componentMeta: Record<
     tag: "Feedback",
     color: "bg-flutter-sky/10 text-flutter-sky border-flutter-sky/20",
     description: "Brief, temporary notifications that appear over the interface.",
-  }
+  },
 };
