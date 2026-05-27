@@ -17,15 +17,6 @@ export const metadata: Metadata = {
   description: "Open source Flutter UI components. Preview, copy, and paste high-quality components into your Flutter apps.",
 };
 
-// Inline script prevents flash of wrong theme before hydration
-const themeScript = `
-  try {
-    var t = localStorage.getItem('flockui-theme');
-    if (t === 'dark') document.documentElement.classList.add('dark');
-    else document.documentElement.classList.remove('dark');
-  } catch(e) {}
-`;
-
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -35,10 +26,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} h-full antialiased`}
     >
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
-      <body className="min-h-full flex flex-col bg-white dark:bg-slate-900 transition-colors duration-200">
+      <body className="min-h-full flex flex-col bg-white transition-colors duration-200">
         <ThemeProvider>
           <Navbar />
           <main className="flex-1">{children}</main>

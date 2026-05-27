@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import SearchModal from "@/components/SearchModal";
-import ThemeToggle from "@/components/ThemeToggle";
 import GithubStars from "@/components/GithubStars";
 import { FaGithub } from "react-icons/fa6";
 import { Menu, X } from "lucide-react";
@@ -38,7 +37,6 @@ export default function Navbar() {
         {/* Right — Search, Icons */}
         <div className="flex items-center gap-2">
           <SearchModal />
-          <ThemeToggle />
 
           <a
             href="https://github.com/Sonu-Hansda/flockui"
