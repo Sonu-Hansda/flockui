@@ -5,14 +5,14 @@
 
 import 'package:flutter/material.dart';
 
-class PreviewComponent extends StatefulWidget {
-  const PreviewComponent({super.key});
+class BottomNavBar extends StatefulWidget {
+  const BottomNavBar({super.key});
 
   @override
-  State<PreviewComponent> createState() => _PreviewComponentState();
+  State<BottomNavBar> createState() => _BottomNavBarState();
 }
 
-class _PreviewComponentState extends State<PreviewComponent> {
+class _BottomNavBarState extends State<BottomNavBar> {
   int _selectedIndex = 0;
 
   static const _labels = ['Home', 'Search', 'Profile'];

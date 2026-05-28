@@ -5,20 +5,20 @@
 //
 // This is a template component. When creating new components, follow this structure:
 // 1. Add header comments describing your component
-// 2. The class MUST be named `PreviewComponent` and extend `StatefulWidget`
+// 2. The class must extend `StatefulWidget` — you can name it anything you like
 // 3. If using external packages, list them in the header comments above
 // 4. Keep the entire component in a single .dart file
 
 import 'package:flutter/material.dart';
 
-class PreviewComponent extends StatefulWidget {
-  const PreviewComponent({super.key});
+class LinearProgressBar extends StatefulWidget {
+  const LinearProgressBar({super.key});
 
   @override
-  State<PreviewComponent> createState() => _PreviewComponentState();
+  State<LinearProgressBar> createState() => _LinearProgressBarState();
 }
 
-class _PreviewComponentState extends State<PreviewComponent>
+class _LinearProgressBarState extends State<LinearProgressBar>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _progress;

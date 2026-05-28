@@ -5,20 +5,20 @@
 //
 // This is a template component. When creating new components, follow this structure:
 // 1. Add header comments describing your component
-// 2. The class MUST be named `PreviewComponent` and extend `StatefulWidget`
+// 2. The class must extend `StatefulWidget` — you can name it anything you like
 // 3. If using external packages, list them in the header comments above
 // 4. Keep the entire component in a single .dart file
 
 import 'package:flutter/material.dart';
 
-class PreviewComponent extends StatefulWidget {
-  const PreviewComponent({super.key});
+class OutlinedCard extends StatefulWidget {
+  const OutlinedCard({super.key});
 
   @override
-  State<PreviewComponent> createState() => _PreviewComponentState();
+  State<OutlinedCard> createState() => _OutlinedCardState();
 }
 
-class _PreviewComponentState extends State<PreviewComponent> {
+class _OutlinedCardState extends State<OutlinedCard> {
   bool _isPressed = false;
 
   @override

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class PreviewComponent extends StatefulWidget {
-  const PreviewComponent({super.key});
+class ToastButton extends StatefulWidget {
+  const ToastButton({super.key});
 
   @override
-  State<PreviewComponent> createState() => _PreviewComponentState();
+  State<ToastButton> createState() => _ToastButtonState();
 }
 
-class _PreviewComponentState extends State<PreviewComponent> {
+class _ToastButtonState extends State<ToastButton> {
   bool _isPressed = false;
 
   void _showToast(BuildContext context, String message) {

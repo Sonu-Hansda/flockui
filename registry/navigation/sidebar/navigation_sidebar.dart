@@ -5,14 +5,14 @@
 
 import 'package:flutter/material.dart';
 
-class PreviewComponent extends StatefulWidget {
-  const PreviewComponent({super.key});
+class SidebarNav extends StatefulWidget {
+  const SidebarNav({super.key});
 
   @override
-  State<PreviewComponent> createState() => _PreviewComponentState();
+  State<SidebarNav> createState() => _SidebarNavState();
 }
 
-class _PreviewComponentState extends State<PreviewComponent> {
+class _SidebarNavState extends State<SidebarNav> {
   int _selectedIndex = 0;
 
   static const _menuItems = [
