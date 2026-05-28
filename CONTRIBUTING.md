@@ -138,9 +138,9 @@ mkdir -p registry/card/default
 
 ### Step 2: Create the Dart Component File
 
-Create `registry/card/default/card_default.dart` with a `PreviewComponent` class.
+Create `registry/card/default/card_default.dart` with a class that extends `StatefulWidget`.
 
-> **Important:** The class **must** be named `PreviewComponent` and extend `StatefulWidget`. This is what the renderer expects.
+> **Important:** The class **must** extend `StatefulWidget`. You can name it anything you like — the renderer will automatically detect your class name and use it for the preview. For example, `MyCustomButton`, `FancyCard`, or `ProfileAvatar` are all valid.
 
 Use the [component template](#component-template) below as a starting point.
 
@@ -206,7 +206,7 @@ mkdir -p registry/button/outline
 
 ### Step 2: Create the Dart File
 
-Create `registry/button/outline/button_outline.dart` with a `PreviewComponent` class.
+Create `registry/button/outline/button_outline.dart` with a class that extends `StatefulWidget`.
 
 ### Step 3: Build the Preview
 
@@ -274,14 +274,14 @@ Every component file should follow this structure. Use the header comments to do
 
 import 'package:flutter/material.dart';
 
-class PreviewComponent extends StatefulWidget {
-  const PreviewComponent({super.key});
+class FlockButton extends StatefulWidget {
+  const FlockButton({super.key});
 
   @override
-  State<PreviewComponent> createState() => _PreviewComponentState();
+  State<FlockButton> createState() => _FlockButtonState();
 }
 
-class _PreviewComponentState extends State<PreviewComponent> {
+class _FlockButtonState extends State<FlockButton> {
   @override
   Widget build(BuildContext context) {
     // Your component widget tree goes here
@@ -295,8 +295,8 @@ class _PreviewComponentState extends State<PreviewComponent> {
 
 ### Rules
 
-1. **Class name must be `PreviewComponent`** — This is required by the renderer.
-2. **Extend `StatefulWidget`** — Even if your component is stateless, wrap it in a `StatefulWidget` for consistency.
+1. **Extend `StatefulWidget`** — Even if your component is stateless, wrap it in a `StatefulWidget` for consistency.
+2. **Name your class anything you want** — The renderer automatically detects your class name. Use a meaningful name like `MyCustomButton`, `FancyCard`, or `ProfileAvatar`.
 3. **No package-level imports** beyond `package:flutter/material.dart` unless necessary (see external dependencies rule below).
 4. **Use Material 3 widgets** where possible (e.g., `FilledButton`, `Card`, `NavigationBar`).
 5. **Keep it self-contained** — The entire component should be in a single `.dart` file.
@@ -323,7 +323,7 @@ If your component requires external packages, **annotate them clearly in comment
 | Component directory | `kebab-case` | `text-field`, `bottom-sheet` |
 | Variant directory | `kebab-case` | `default`, `outline`, `with-icon` |
 | Dart file | `snake_case` | `text_field_default.dart`, `button_outline.dart` |
-| Dart class | `PascalCase` | `PreviewComponent` (always) |
+| Dart class | `PascalCase` | `MyCustomButton`, `FancyCard` (any meaningful name) |
 
 ---
 
