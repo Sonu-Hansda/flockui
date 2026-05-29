@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { Code2, Eye } from 'lucide-react'
 import CodeBlock from '@/components/CodeBlock'
 import ComponentPreview from '@/components/ComponentPreview'
 
@@ -19,6 +20,8 @@ interface Meta {
     description: string
 }
 
+type ViewMode = 'preview' | 'code'
+
 export default function ComponentPageClient({
     slug,
     meta,
@@ -29,6 +32,7 @@ export default function ComponentPageClient({
     variantData: VariantData[]
 }) {
     const [selectedVariant, setSelectedVariant] = useState(variantData[0]?.variant ?? '')
+    const [viewMode, setViewMode] = useState<ViewMode>('preview')
 
     const current = variantData.find(d => d.variant === selectedVariant) ?? variantData[0]
 
@@ -62,6 +66,34 @@ export default function ComponentPageClient({
                     </div>
                 </div>
 
+                {/* Mobile View Toggle — only visible below lg */}
+                <div className="lg:hidden mb-4">
+                    <div className="flex gap-1 bg-slate-100 dark:bg-slate-800 rounded-lg p-1 w-fit">
+                        <button
+                            onClick={() => setViewMode('preview')}
+                            className={`flex items-center gap-1.5 px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
+                                viewMode === 'preview'
+                                    ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm'
+                                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300'
+                            }`}
+                        >
+                            <Eye className="h-4 w-4" />
+                            Preview
+                        </button>
+                        <button
+                            onClick={() => setViewMode('code')}
+                            className={`flex items-center gap-1.5 px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
+                                viewMode === 'code'
+                                    ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm'
+                                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300'
+                            }`}
+                        >
+                            <Code2 className="h-4 w-4" />
+                            Code
+                        </button>
+                    </div>
+                </div>
+
                 {/* Variant Tabs */}
                 {variantData.length > 1 && (
                     <div className="mb-8 flex gap-1 bg-slate-100 dark:bg-slate-800 rounded-lg p-1 w-fit">
@@ -84,9 +116,10 @@ export default function ComponentPageClient({
                     </div>
                 )}
 
-                {/* Code (left) + Preview (right) */}
+                {/* Code (left) + Preview (right) on desktop; toggled on mobile */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-                    <div className="flex flex-col gap-2">
+                    {/* Code section — hidden on mobile when preview is active */}
+                    <div className={`flex flex-col gap-2 ${viewMode === 'code' ? 'block' : 'hidden'} lg:block`}>
                         <p className="text-xs font-semibold uppercase tracking-widest text-slate-400">
                             Code
                         </p>
@@ -98,7 +131,8 @@ export default function ComponentPageClient({
                         </div>
                     </div>
 
-                    <div className="flex flex-col gap-2">
+                    {/* Preview section — hidden on mobile when code is active */}
+                    <div className={`flex flex-col gap-2 ${viewMode === 'preview' ? 'block' : 'hidden'} lg:block`}>
                         <p className="text-xs font-semibold uppercase tracking-widest text-slate-400">
                             Preview
                         </p>

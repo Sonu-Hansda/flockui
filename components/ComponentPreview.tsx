@@ -53,7 +53,7 @@ export default function ComponentPreview({
 
             {/* Platform switcher + Live Preview button */}
             <div className="flex items-center justify-between">
-                <div className="flex items-center gap-1 bg-slate-100
+                <div className="hidden lg:flex items-center gap-1 bg-slate-100
                           dark:bg-slate-800 rounded-lg p-1 w-fit">
                     {platforms.map((p) => {
                         const Icon = p.icon
