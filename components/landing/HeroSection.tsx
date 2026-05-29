@@ -1,10 +1,12 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Code2 } from "lucide-react";
 
 export default function HeroSection() {
   return (
-    <section className="relative w-full overflow-hidden bg-white dark:bg-slate-900 pt-24 pb-32 sm:pt-28 sm:pb-36 transition-colors duration-200">
-      <div className="pointer-events-none absolute inset-0 opacity-[0.04] dark:opacity-[0.06]">
+    <section className="relative w-full overflow-hidden pt-24 pb-12 sm:pt-16 sm:pb-18">
+      {/* Subtle gradient glow */}
+      <div className="pointer-events-none absolute inset-0 opacity-[0.03] dark:opacity-[0.05]">
         <div
           className="absolute inset-0 animate-gradient"
           style={{
@@ -15,38 +17,7 @@ export default function HeroSection() {
         />
       </div>
 
-      <div
-        className="dark:hidden pointer-events-none absolute inset-0"
-        style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E\")",
-          opacity: 0.35,
-        }}
-      />
-
-      <div className="hidden dark:block pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(2,125,253,0.08)_0%,transparent_60%)]" />
-
-      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <div className="relative h-125 w-125 sm:h-150 sm:w-150">
-          <div className="absolute inset-0 rounded-full bg-linear-to-br from-flutter-sky/25 via-flutter-purple/20 to-accent-cyan/25 blur-3xl animate-pulse-soft dark:from-flutter-sky/30 dark:via-flutter-purple/25 dark:to-accent-cyan/30" />
-          <div className="absolute inset-[15%] rounded-full bg-linear-to-br from-flutter-sky/15 via-flutter-blue/10 to-transparent blur-2xl animate-float-slow dark:from-flutter-sky/20 dark:via-flutter-blue/15" />
-        </div>
-      </div>
-
-      <div className="pointer-events-none absolute right-[10%] top-[20%] hidden sm:block">
-        <div className="h-16 w-16 rounded-full border border-flutter-sky/10 bg-flutter-sky/5 blur-sm animate-float-delayed dark:border-flutter-sky/20 dark:bg-flutter-sky/10" />
-      </div>
-      <div className="pointer-events-none absolute left-[8%] bottom-[25%] hidden sm:block">
-        <div className="h-10 w-10 rounded-lg border border-flutter-purple/10 bg-flutter-purple/5 blur-sm animate-float dark:border-flutter-purple/20 dark:bg-flutter-purple/10" style={{ animationDelay: "1s" }} />
-      </div>
-
       <div className="relative mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
-        {/* Badge */}
-        <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-flutter-sky/20 dark:border-flutter-sky/30 bg-white/80 dark:bg-white/5 px-4 py-1.5 text-sm font-semibold text-flutter-blue dark:text-flutter-sky backdrop-blur-sm shadow-sm">
-          <span className="inline-block h-1.5 w-1.5 rounded-full bg-flutter-sky animate-pulse" />
-          Open Source &middot; Free to use
-        </div>
-
         {/* Headline */}
         <h1 className="text-5xl font-semibold tracking-tight text-slate-900 dark:text-white sm:text-7xl lg:text-8xl leading-[1.05]">
           Flutter components.
@@ -75,6 +46,20 @@ export default function HeroSection() {
             <Code2 className="h-4 w-4" />
             Read the Docs
           </Link>
+        </div>
+
+        {/* Showcase image */}
+        <div className="mt-16">
+          <div className="relative mx-auto md:max-w-4xl dark:border-slate-700 bg-white dark:bg-slate-800 shadow-none shadow-slate-200/50 dark:shadow-slate-950/50 overflow-hidden">
+            <Image
+              src="/hero_showcase.png"
+              alt="Flutter UI component showcase"
+              width={1200}
+              height={675}
+              className="w-full h-auto"
+              priority
+            />
+          </div>
         </div>
 
         <div className="mt-12 flex items-center justify-center gap-6 sm:gap-10">
