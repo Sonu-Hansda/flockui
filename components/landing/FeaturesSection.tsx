@@ -42,7 +42,7 @@ const features = [
 
 export default function FeaturesSection() {
   return (
-    <section className="relative w-full overflow-hidden bg-slate-50 dark:bg-slate-900 py-24 transition-colors duration-200">
+    <section className="relative w-full overflow-hidden bg-slate-50 dark:bg-slate-900 pb-12 transition-colors duration-200">
       {/* Subtle background glow */}
       <div className="pointer-events-none absolute -left-40 top-0 h-96 w-96 rounded-full bg-flutter-blue/5 dark:bg-flutter-blue/10 blur-3xl" />
       <div className="pointer-events-none absolute -right-40 bottom-0 h-96 w-96 rounded-full bg-flutter-purple/5 dark:bg-flutter-purple/10 blur-3xl" />
@@ -64,7 +64,7 @@ export default function FeaturesSection() {
         </ScrollReveal>
 
         {/* Bento grid */}
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 auto-rows-fr">
           {features.map((f, i) => {
             const colSpan =
               f.size === "large"
@@ -76,11 +76,11 @@ export default function FeaturesSection() {
             return (
               <ScrollReveal key={f.title} delay={i + 1}>
                 <div
-                  className={`group relative rounded-2xl border border-slate-200 dark:border-slate-700/80 bg-white dark:bg-slate-800/60 p-6 sm:p-7 hover:shadow-lg hover:border-slate-300 dark:hover:border-slate-600 hover:-translate-y-0.5 transition-all overflow-hidden ${colSpan}`}
+                  className={`group relative rounded-2xl border border-slate-200 dark:border-slate-700/80 bg-white dark:bg-slate-800/60 p-6 sm:p-7 hover:shadow-lg hover:border-slate-300 dark:hover:border-slate-600 hover:-translate-y-0.5 transition-all overflow-hidden h-full ${colSpan}`}
                 >
                   {/* Gradient overlay */}
                   <div
-                    className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${f.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                    className={`pointer-events-none absolute inset-0 bg-linear-to-br ${f.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
                   />
 
                   {/* Content */}
