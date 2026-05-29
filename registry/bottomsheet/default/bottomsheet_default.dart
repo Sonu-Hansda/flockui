@@ -183,6 +183,7 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
         width: 260,
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Preview label
             Text(
