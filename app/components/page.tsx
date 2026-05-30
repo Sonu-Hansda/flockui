@@ -8,6 +8,7 @@ export const metadata: Metadata = {
 import fs from "fs";
 import path from "path";
 import Link from "next/link";
+import Image from "next/image";
 import { componentMeta } from "@/lib/component-meta";
 
 function getRegistryComponents() {
@@ -62,10 +63,6 @@ export default function ComponentsPage() {
             Browse all available Flutter UI components. Click any
             category to see previews and copy the source code.
           </p>
-          {/* live count from registry */}
-          <p className="mt-2 text-sm text-slate-400 dark:text-slate-500">
-            {categories.length} components available
-          </p>
         </div>
       </div>
 
@@ -77,19 +74,25 @@ export default function ComponentsPage() {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {categories.map((cat) => (
               <Link
                 key={cat.slug}
                 href={`/components/${cat.slug}`}
-                className="group flex items-center justify-between rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-5 hover:border-flutter-blue hover:shadow-sm transition-all"
+                className="group flex flex-col rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 overflow-hidden hover:border-flutter-blue hover:shadow-md transition-all"
               >
-                <div className="flex items-center gap-4">
-                  <div
-                    className={`flex h-11 w-11 items-center justify-center rounded-xl border text-sm font-black ${cat.color}`}
-                  >
-                    {cat.count}
-                  </div>
+                {/* Image preview */}
+                <div className="relative aspect-video bg-slate-50 dark:bg-slate-900 overflow-hidden">
+                  <Image
+                    src={`/components/${cat.slug}.png`}
+                    alt={cat.name}
+                    fill
+                    className="object-contain p-4 group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+
+                {/* Info footer */}
+                <div className="flex items-center justify-between p-5">
                   <div>
                     <p className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-flutter-blue dark:group-hover:text-flutter-sky transition-colors">
                       {cat.name}
@@ -98,8 +101,8 @@ export default function ComponentsPage() {
                       {cat.tag}
                     </p>
                   </div>
+                  <ChevronRight className="h-4 w-4 text-slate-300 dark:text-slate-600 group-hover:text-flutter-blue dark:group-hover:text-flutter-sky group-hover:translate-x-0.5 transition-all" />
                 </div>
-                <ChevronRight className="h-4 w-4 text-slate-300 dark:text-slate-600 group-hover:text-flutter-blue dark:group-hover:text-flutter-sky group-hover:translate-x-0.5 transition-all" />
               </Link>
             ))}
           </div>
