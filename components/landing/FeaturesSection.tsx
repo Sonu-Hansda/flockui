@@ -1,4 +1,4 @@
-import { Package, Paintbrush2, Settings2, GitFork } from "lucide-react";
+import Image from "next/image";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const features = [
@@ -6,7 +6,7 @@ const features = [
     title: "Zero Dependencies",
     description:
       "No packages to install. Copy the Dart code directly into your project and you own it entirely. No version conflicts, no breaking changes.",
-    icon: <Package className="h-5 w-5" />,
+    image: "/zero_dep.png",
     gradient: "from-flutter-blue/20 via-flutter-sky/10 to-transparent",
     accent: "text-flutter-blue dark:text-flutter-sky",
     size: "large",
@@ -15,7 +15,7 @@ const features = [
     title: "Beautiful by Default",
     description:
       "Every component follows Material Design 3 and Flutter best practices. Looks great from the first paste.",
-    icon: <Paintbrush2 className="h-5 w-5" />,
+    image: "/beautiful.png",
     gradient: "from-flutter-purple/20 via-transparent to-transparent",
     accent: "text-flutter-purple dark:text-purple-300",
     size: "small",
@@ -24,7 +24,7 @@ const features = [
     title: "Fully Customizable",
     description:
       "Since you own the code, every color, size, and behavior is yours to change without fighting an API.",
-    icon: <Settings2 className="h-5 w-5" />,
+    image: "/customizable.png",
     gradient: "from-accent-cyan/20 via-transparent to-transparent",
     accent: "text-accent-cyan dark:text-cyan-300",
     size: "small",
@@ -33,7 +33,7 @@ const features = [
     title: "Open Source",
     description:
       "MIT licensed. Use in personal, commercial, or enterprise projects without restrictions. Built for the community, by the community.",
-    icon: <GitFork className="h-5 w-5" />,
+    image: "/open_source.png",
     gradient: "from-flutter-green/20 via-flutter-blue/5 to-transparent",
     accent: "text-flutter-green dark:text-emerald-300",
     size: "wide", // spans full width
@@ -51,8 +51,10 @@ export default function FeaturesSection() {
         {/* Section header */}
         <ScrollReveal>
           <div className="mb-14 max-w-xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-flutter-blue/20 dark:border-flutter-sky/20 bg-flutter-blue/5 dark:bg-flutter-sky/10 px-3.5 py-1 text-xs font-bold uppercase tracking-widest text-flutter-blue dark:text-flutter-sky mb-4">
-              Why FlockUI
+            <div className="flex items-center gap-3 mb-4">
+              <span className="text-xs text-slate-400 dark:text-slate-500 font-medium">
+                What makes it different
+              </span>
             </div>
             <h2 className="text-4xl font-extrabold text-slate-900 dark:text-white sm:text-5xl">
               Built different
@@ -83,13 +85,19 @@ export default function FeaturesSection() {
                     className={`pointer-events-none absolute inset-0 bg-linear-to-br ${f.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
                   />
 
+                  {/* Full-width image */}
+                  <div className="relative -mx-6 -mt-6 sm:-mx-7 sm:-mt-7 mb-5 overflow-hidden">
+                    <Image
+                      src={f.image}
+                      alt={f.title}
+                      width={800}
+                      height={300}
+                      className="w-full h-auto object-cover"
+                    />
+                  </div>
+
                   {/* Content */}
                   <div className="relative z-10">
-                    <div
-                      className={`mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 ${f.accent} shadow-sm`}
-                    >
-                      {f.icon}
-                    </div>
                     <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">
                       {f.title}
                     </h3>
