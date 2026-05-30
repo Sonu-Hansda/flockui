@@ -94,9 +94,11 @@ export default function CtaSection() {
               rel="noopener noreferrer"
               className="group inline-flex h-12 items-center gap-2 rounded-xl border border-white/15 bg-white/4 px-8 text-sm font-semibold text-white/80 hover:bg-white/10 hover:border-white/25 transition-all backdrop-blur-sm hover:-translate-y-0.5"
             >
-              <img
+              <Image
                 src="https://storage.ko-fi.com/cdn/logomarkLogo.png"
                 alt="Ko-fi"
+                width={16}
+                height={16}
                 className="h-4 w-4 opacity-70 group-hover:opacity-100 transition-opacity"
               />
               Support on Ko-fi
