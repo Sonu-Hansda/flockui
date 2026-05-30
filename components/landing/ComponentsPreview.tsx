@@ -130,7 +130,7 @@ export default function ComponentsPreview() {
               >
                 {/* Gradient overlay on hover */}
                 <div
-                  className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${cat.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                  className={`pointer-events-none absolute inset-0 bg-linear-to-br ${cat.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
                 />
 
                 <div className="relative z-10 flex items-center gap-4">

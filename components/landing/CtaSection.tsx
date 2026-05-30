@@ -10,7 +10,7 @@ export default function CtaSection() {
       {/* Subtle static radial glow — no animation, just depth */}
       <div className="pointer-events-none absolute inset-0">
         <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] rounded-full opacity-[0.06]"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-125 w-125 rounded-full opacity-[0.06]"
           style={{
             background:
               "radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, transparent 70%)",
@@ -83,7 +83,7 @@ export default function CtaSection() {
               href="https://github.com/Sonu-Hansda/flockui"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex h-12 items-center gap-2 rounded-xl border border-white/15 bg-white/[0.04] px-8 text-sm font-semibold text-white/80 hover:bg-white/10 hover:border-white/25 transition-all backdrop-blur-sm hover:-translate-y-0.5"
+              className="group inline-flex h-12 items-center gap-2 rounded-xl border border-white/15 bg-white/4 px-8 text-sm font-semibold text-white/80 hover:bg-white/10 hover:border-white/25 transition-all backdrop-blur-sm hover:-translate-y-0.5"
             >
               <FaGithub className="h-4 w-4" />
               Star on GitHub
@@ -92,7 +92,7 @@ export default function CtaSection() {
               href="https://ko-fi.com/sonuhansda"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex h-12 items-center gap-2 rounded-xl border border-white/15 bg-white/[0.04] px-8 text-sm font-semibold text-white/80 hover:bg-white/10 hover:border-white/25 transition-all backdrop-blur-sm hover:-translate-y-0.5"
+              className="group inline-flex h-12 items-center gap-2 rounded-xl border border-white/15 bg-white/4 px-8 text-sm font-semibold text-white/80 hover:bg-white/10 hover:border-white/25 transition-all backdrop-blur-sm hover:-translate-y-0.5"
             >
               <img
                 src="https://storage.ko-fi.com/cdn/logomarkLogo.png"
