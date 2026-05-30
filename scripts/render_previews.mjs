@@ -75,11 +75,11 @@ if (!fs.existsSync(SourceFile)) {
 
 // Read the source file to extract the actual class name
 const sourceContent = fs.readFileSync(SourceFile, 'utf8');
-const classMatch = sourceContent.match(/class\s+(\w+)\s+extends\s+StatefulWidget/);
+const classMatch = sourceContent.match(/class\s+(\w+)\s+extends\s+(?:Stateful|Stateless)Widget/);
 
 if (!classMatch) {
-  console.error(`Error: Could not find a class extending StatefulWidget in ${SourceFile}`);
-  console.error("Make sure your component file contains a class that extends StatefulWidget.");
+  console.error(`Error: Could not find a class extending StatefulWidget or StatelessWidget in ${SourceFile}`);
+  console.error("Make sure your component file contains a class that extends StatefulWidget or StatelessWidget.");
   process.exit(1);
 }
 
