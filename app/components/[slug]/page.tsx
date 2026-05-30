@@ -38,17 +38,14 @@ export default async function ComponentPage({ params }: { params: Promise<{ slug
 
     const variantData = await Promise.all(variants.map(async (variant) => {
         const code = getComponentCode(slug, variant)
-        const [highlightedDark, highlightedLight] = await Promise.all([
-            codeToHtml(code, { lang: 'dart', theme: 'dark-plus' }),
-            codeToHtml(code, { lang: 'dart', theme: 'github-light' }),
-        ])
+        const highlightedLight = await codeToHtml(code, { lang: 'dart', theme: 'github-light' })
         let hasPreview = true;
         if (process.env.NODE_ENV === 'development') {
             const previewPath = path.join(process.cwd(), 'public', 'previews', slug, variant, 'index.html');
             hasPreview = fs.existsSync(previewPath);
         }
 
-        return { variant, code, highlightedDark, highlightedLight, hasPreview }
+        return { variant, code, highlightedLight, hasPreview }
     }))
 
     return (

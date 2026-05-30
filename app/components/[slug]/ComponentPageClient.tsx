@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { Code2, Eye } from 'lucide-react'
 import CodeBlock from '@/components/CodeBlock'
 import ComponentPreview from '@/components/ComponentPreview'
@@ -8,7 +9,6 @@ import ComponentPreview from '@/components/ComponentPreview'
 interface VariantData {
     variant: string
     code: string
-    highlightedDark: string
     highlightedLight: string
     hasPreview: boolean
 }
@@ -38,29 +38,33 @@ export default function ComponentPageClient({
 
     if (!current) {
         return (
-            <div className="min-h-screen bg-white dark:bg-slate-900 flex items-center justify-center">
+            <div className="min-h-screen bg-white flex items-center justify-center">
                 <p className="text-slate-500">No variants found.</p>
             </div>
         )
     }
 
     return (
-        <div className="min-h-screen bg-white dark:bg-slate-900">
+        <div className="min-h-screen bg-white ">
             <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
 
                 {/* Header */}
                 <div className="mb-10">
                     <p className="text-sm text-slate-400 mb-1 capitalize">
-                        Components / {meta.name}
+                        <Link href="/components" className="hover:text-slate-600 transition-colors">
+                            Components
+                        </Link>
+                        {" / "}
+                        {meta.name}
                     </p>
-                    <h1 className="text-4xl font-extrabold text-slate-900 dark:text-white mb-3">
+                    <h1 className="text-4xl font-extrabold text-slate-900 mb-3">
                         {meta.name}
                     </h1>
-                    <p className="text-slate-500 dark:text-slate-400 max-w-xl">
+                    <p className="text-slate-500 max-w-xl">
                         {meta.description}
                     </p>
                     <div className="flex gap-2 mt-4">
-                        <span className="text-xs font-medium px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+                        <span className="text-xs font-medium px-3 py-1 rounded-full bg-slate-100 text-slate-600 ">
                             {meta.tag}
                         </span>
                     </div>
@@ -68,13 +72,13 @@ export default function ComponentPageClient({
 
                 {/* Mobile View Toggle — only visible below lg */}
                 <div className="lg:hidden mb-4">
-                    <div className="flex gap-1 bg-slate-100 dark:bg-slate-800 rounded-lg p-1 w-fit">
+                    <div className="flex gap-1 bg-slate-100 rounded-lg p-1 w-fit">
                         <button
                             onClick={() => setViewMode('preview')}
                             className={`flex items-center gap-1.5 px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                                 viewMode === 'preview'
-                                    ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm'
-                                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300'
+                                    ? 'bg-white text-slate-900 shadow-sm'
+                                    : 'text-slate-500 hover:text-slate-700 '
                             }`}
                         >
                             <Eye className="h-4 w-4" />
@@ -84,8 +88,8 @@ export default function ComponentPageClient({
                             onClick={() => setViewMode('code')}
                             className={`flex items-center gap-1.5 px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                                 viewMode === 'code'
-                                    ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm'
-                                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300'
+                                    ? 'bg-white text-slate-900 shadow-sm'
+                                    : 'text-slate-500 hover:text-slate-700 '
                             }`}
                         >
                             <Code2 className="h-4 w-4" />
@@ -96,17 +100,17 @@ export default function ComponentPageClient({
 
                 {/* Variant Tabs */}
                 {variantData.length > 1 && (
-                    <div className="mb-8 flex gap-1 bg-slate-100 dark:bg-slate-800 rounded-lg p-1 w-fit">
+                    <div className="mb-8 flex gap-1 bg-slate-100 rounded-lg p-1 w-fit max-w-full overflow-x-auto no-scrollbar">
                         {variantData.map((data) => {
                             const isActive = selectedVariant === data.variant
                             return (
                                 <button
                                     key={data.variant}
                                     onClick={() => setSelectedVariant(data.variant)}
-                                    className={`px-4 py-2 rounded-md text-sm font-medium capitalize transition-all duration-200 ${
+                                    className={`px-4 py-2 rounded-md text-sm font-medium capitalize transition-all duration-200 whitespace-nowrap ${
                                         isActive
-                                            ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm'
-                                            : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300'
+                                            ? 'bg-white text-slate-900 shadow-sm'
+                                            : 'text-slate-500 hover:text-slate-700 '
                                     }`}
                                 >
                                     {data.variant.replace(/-/g, ' ')}

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* Enable class-based dark mode for Tailwind v4 */
-@variant dark (&:where(.dark, .dark *));
+/* @variant dark (&:where(.dark, .dark *)); */
 
 @theme inline {
   --color-flutter-navy: #042B59;
@@ -57,12 +57,14 @@ kbd {
 }
 
 /* Dark mode kbd */
+/*
 .dark kbd {
   border-color: #334155;
   background: #1e293b;
   color: #94a3b8;
   box-shadow: 0 1px 0 #0f172a;
 }
+*/
 
 /* Search dialog */
 .search-dialog {
@@ -76,11 +78,13 @@ kbd {
 }
 
 /* Dark mode search dialog */
+/*
 .dark .search-dialog {
   background: #1e293b;
   border-color: #334155;
   box-shadow: 0 25px 60px rgba(0,0,0,0.5);
 }
+*/
 
 /* =============================================
    ANIMATIONS
@@ -195,10 +199,12 @@ kbd {
   border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
+/*
 .dark .glass {
   background: rgba(255, 255, 255, 0.05);
   border-color: rgba(255, 255, 255, 0.08);
 }
+*/
 
 /* Gradient border */
 .gradient-border {
@@ -224,4 +230,15 @@ kbd {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }

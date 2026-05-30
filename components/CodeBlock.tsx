@@ -35,7 +35,7 @@ export default function CodeBlock({
     }
 
     return (
-        <div className="relative group rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 h-full flex flex-col">
+        <div className="relative group rounded-xl overflow-hidden border border-slate-200 h-full flex flex-col">
             {/* Padding wrapper so code never touches the border */}
             <div
                 className="overflow-auto text-sm flex-1 [&>pre]:p-5 [&>pre]:h-full [&>pre]:m-0"
@@ -44,8 +44,8 @@ export default function CodeBlock({
             <button
                 onClick={handleCopy}
                 className="absolute top-3 right-3 p-2 rounded-lg
-                   bg-black/5 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/20
-                   text-slate-600 dark:text-white/70 hover:text-slate-900 dark:hover:text-white
+                   bg-black/5 hover:bg-black/10 
+                   text-slate-600 hover:text-slate-900 
                    transition-all duration-200
                    opacity-0 group-hover:opacity-100"
             >

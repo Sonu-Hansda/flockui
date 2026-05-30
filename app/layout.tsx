@@ -13,8 +13,29 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "FlockUI - Flutter UI Library Platform",
+  title: {
+    default: "FlockUI - Flutter UI Library Platform",
+    template: "%s | FlockUI",
+  },
   description: "Open source Flutter UI components. Preview, copy, and paste high-quality components into your Flutter apps.",
+  metadataBase: new URL("https://flockui.dev"),
+  openGraph: {
+    title: "FlockUI - Flutter UI Component Library",
+    description: "An open-source collection of copy-paste Flutter UI components. Browse the preview, grab the code, and ship faster.",
+    siteName: "FlockUI",
+    type: "website",
+    images: ["/hero_showcase.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "FlockUI - Flutter UI Component Library",
+    description: "An open-source collection of copy-paste Flutter UI components. Browse the preview, grab the code, and ship faster.",
+    images: ["/hero_showcase.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
