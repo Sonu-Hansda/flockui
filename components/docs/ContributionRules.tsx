@@ -18,15 +18,15 @@ export default function ContributionRules() {
   return (
     <>
       <section>
-        <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3">Code Rules</h3>
+        <h3 className="text-lg font-bold text-slate-900 mb-3">Code Rules</h3>
         <ul className="space-y-2">
           {rules.map((item) => (
-            <li key={item.label} className="flex items-start gap-3 rounded-xl border border-slate-100 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-4 py-3">
-              <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-flutter-blue/10 dark:bg-flutter-sky/10 text-flutter-blue dark:text-flutter-sky">
+            <li key={item.label} className="flex items-start gap-3 rounded-xl border border-slate-100 bg-slate-50 px-4 py-3">
+              <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-flutter-blue/10 text-flutter-blue ">
                 <Check className="h-3 w-3" />
               </span>
-              <span className="text-sm text-slate-700 dark:text-slate-300">
-                <strong className="font-semibold text-slate-900 dark:text-white">{item.label}:</strong> {item.desc}
+              <span className="text-sm text-slate-700 ">
+                <strong className="font-semibold text-slate-900 ">{item.label}:</strong> {item.desc}
               </span>
             </li>
           ))}
@@ -34,22 +34,22 @@ export default function ContributionRules() {
       </section>
 
       <section>
-        <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3">Naming Conventions</h3>
-        <div className="overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700">
+        <h3 className="text-lg font-bold text-slate-900 mb-3">Naming Conventions</h3>
+        <div className="overflow-hidden rounded-xl border border-slate-200 ">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-slate-50 dark:bg-slate-800">
-                <th className="px-4 py-3 text-left font-semibold text-slate-700 dark:text-slate-300">Item</th>
-                <th className="px-4 py-3 text-left font-semibold text-slate-700 dark:text-slate-300">Convention</th>
-                <th className="px-4 py-3 text-left font-semibold text-slate-700 dark:text-slate-300">Example</th>
+              <tr className="bg-slate-50 ">
+                <th className="px-4 py-3 text-left font-semibold text-slate-700 ">Item</th>
+                <th className="px-4 py-3 text-left font-semibold text-slate-700 ">Convention</th>
+                <th className="px-4 py-3 text-left font-semibold text-slate-700 ">Example</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100 dark:divide-slate-700">
+            <tbody className="divide-y divide-slate-100 ">
               {namingConventions.map(([item, convention, example]) => (
-                <tr key={item} className="bg-white dark:bg-slate-900">
-                  <td className="px-4 py-3 font-medium text-slate-900 dark:text-white">{item}</td>
-                  <td className="px-4 py-3 text-slate-600 dark:text-slate-400">{convention}</td>
-                  <td className="px-4 py-3 text-flutter-blue dark:text-flutter-sky font-mono text-xs">{example}</td>
+                <tr key={item} className="bg-white ">
+                  <td className="px-4 py-3 font-medium text-slate-900 ">{item}</td>
+                  <td className="px-4 py-3 text-slate-600 ">{convention}</td>
+                  <td className="px-4 py-3 text-flutter-blue font-mono text-xs">{example}</td>
                 </tr>
               ))}
             </tbody>

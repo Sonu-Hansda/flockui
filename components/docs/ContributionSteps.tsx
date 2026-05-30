@@ -36,21 +36,21 @@ const steps = [
 export default function ContributionSteps() {
   return (
     <section>
-      <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">Contribution Overview</h3>
+      <h3 className="text-lg font-bold text-slate-900 mb-4">Contribution Overview</h3>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {steps.map((step, i) => {
           const Icon = step.icon;
           return (
             <div
               key={step.title}
-              className="flex items-start gap-3 rounded-xl border border-slate-100 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-4 py-3"
+              className="flex items-start gap-3 rounded-xl border border-slate-100 bg-slate-50 px-4 py-3"
             >
-              <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-flutter-blue/10 dark:bg-flutter-sky/10 text-flutter-blue dark:text-flutter-sky text-xs font-bold">
-                {i + 1}
+              <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-flutter-blue/10 text-flutter-blue ">
+                <Icon className="h-3.5 w-3.5" />
               </span>
               <div>
-                <p className="text-sm font-semibold text-slate-900 dark:text-white">{step.title}</p>
-                <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{step.desc}</p>
+                <p className="text-sm font-semibold text-slate-900 ">{step.title}</p>
+                <p className="text-xs text-slate-500 mt-0.5">{step.desc}</p>
               </div>
             </div>
           );
