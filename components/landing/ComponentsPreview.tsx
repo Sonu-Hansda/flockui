@@ -101,8 +101,10 @@ export default function ComponentsPreview() {
         <ScrollReveal>
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-12 gap-4">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-flutter-blue/20 dark:border-flutter-sky/20 bg-flutter-blue/5 dark:bg-flutter-sky/10 px-3.5 py-1 text-xs font-bold uppercase tracking-widest text-flutter-blue dark:text-flutter-sky mb-4">
-                Components
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-xs text-slate-400 dark:text-slate-500 font-medium">
+                  Ready to use
+                </span>
               </div>
               <h2 className="text-4xl font-extrabold text-slate-900 dark:text-white sm:text-5xl">
                 Grab what you need
