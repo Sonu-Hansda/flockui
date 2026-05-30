@@ -68,3 +68,14 @@ export const componentMeta: Record<
     description: "Brief, temporary notifications that appear over the interface.",
   },
 };
+
+export type ComponentMetaEntry = (typeof componentMeta)[keyof typeof componentMeta];
+
+export function getComponentMeta(slug: string): ComponentMetaEntry {
+  return componentMeta[slug] ?? {
+    name: slug.charAt(0).toUpperCase() + slug.slice(1),
+    tag: "Component",
+    color: "bg-slate-100 text-slate-800 border-slate-200",
+    description: `A ${slug} component for your Flutter applications.`,
+  };
+}
