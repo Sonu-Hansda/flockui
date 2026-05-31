@@ -67,6 +67,13 @@ export const componentMeta: Record<
     color: "bg-flutter-sky/10 text-flutter-sky border-flutter-sky/20",
     description: "Brief, temporary notifications that appear over the interface.",
   },
+  divider: {
+    name: "Dividers",
+    tag: "Layout",
+    color: "bg-flutter-purple/10 text-flutter-purple border-flutter-purple/20",
+    description:
+      "Horizontal and vertical dividers with optional labels and customizable styling.",
+  },
 };
 
 export type ComponentMetaEntry = (typeof componentMeta)[keyof typeof componentMeta];
