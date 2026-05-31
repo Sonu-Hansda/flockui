@@ -1,6 +1,6 @@
 # Contributing to FlockUI
 
-First off, thank you for considering contributing to FlockUI! 🎉 We're building an open-source Flutter UI component library, and every contribution — whether it's a new component, a bug fix, or a documentation improvement — helps the community grow.
+First off, thank you for considering contributing to FlockUI! 🎉 I'm building an open-source Flutter UI component library, and every contribution — whether it's a new component, a bug fix, or a documentation improvement — helps the community grow.
 
 ---
 
@@ -22,7 +22,7 @@ First off, thank you for considering contributing to FlockUI! 🎉 We're buildin
 
 ## Code of Conduct
 
-This project and everyone participating in it is governed by the [MIT License](LICENSE). By participating, you are expected to uphold this code of respect and collaboration. Please report unacceptable behavior to [sonukumarhansda61@gmail.com](mailto:sonukumarhansda61@gmail.com).
+This project follows the Contributor Covenant Code of Conduct. By participating, you are expected to uphold these standards. Please report unacceptable behavior to sonukumarhansda61@gmail.com.
 
 ---
 
@@ -314,7 +314,7 @@ If your component requires external packages, **annotate them clearly in comment
 //   - package:http/http.dart (for uploading images)
 ```
 
-> **Important:** External packages must also be added to `renderer/pubspec.yaml` for the preview build to work. If you're unsure, mention it in your pull request and we'll help.
+> **Important:** External packages must also be added to `renderer/pubspec.yaml` for the preview build to work. If you're unsure, mention it in your pull request and I'll help.
 
 ### Naming Conventions
 
@@ -387,4 +387,4 @@ If you have questions or run into issues:
 - **Message me on [LinkedIn](https://linkedin.com/in/sonu-hansda)**
 - **Email me** at [sonukumarhansda61@gmail.com](mailto:sonukumarhansda61@gmail.com)
 
-We're excited to see what you build!
+I'm excited to see what you build!
