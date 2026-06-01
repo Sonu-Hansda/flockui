@@ -67,6 +67,12 @@ export const componentMeta: Record<
     color: "bg-flutter-sky/10 text-flutter-sky border-flutter-sky/20",
     description: "Brief, temporary notifications that appear over the interface.",
   },
+  toggle: {
+    name: "Toggles",
+    tag: "Forms",
+    color: "bg-flutter-red/10 text-flutter-red border-flutter-red/20",
+    description: "Switch controls for toggling between two states with smooth animations.",
+  },
   divider: {
     name: "Dividers",
     tag: "Layout",
