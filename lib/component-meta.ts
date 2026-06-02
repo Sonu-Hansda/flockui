@@ -80,6 +80,13 @@ export const componentMeta: Record<
     description:
       "Horizontal and vertical dividers with optional labels and customizable styling.",
   },
+  stepper: {
+    name: "Steppers",
+    tag: "Navigation",
+    color: "bg-flutter-green/10 text-flutter-green border-flutter-green/20",
+    description:
+      "Step progress indicators for guiding users through multi-step processes and workflows.",
+  },
 };
 
 export type ComponentMetaEntry = (typeof componentMeta)[keyof typeof componentMeta];
