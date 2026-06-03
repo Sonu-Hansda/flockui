@@ -80,6 +80,12 @@ export const componentMeta: Record<
     description:
       "Horizontal and vertical dividers with optional labels and customizable styling.",
   },
+  slider: {
+    name: "Sliders",
+    tag: "Forms",
+    color: "bg-flutter-red/10 text-flutter-red border-flutter-red/20",
+    description: "Interactive sliders for selecting values from a range with smooth drag controls.",
+  },
   stepper: {
     name: "Steppers",
     tag: "Navigation",
