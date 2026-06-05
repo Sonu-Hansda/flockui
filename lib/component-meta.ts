@@ -86,6 +86,12 @@ export const componentMeta: Record<
     color: "bg-flutter-red/10 text-flutter-red border-flutter-red/20",
     description: "Interactive sliders for selecting values from a range with smooth drag controls.",
   },
+  "list-tile": {
+    name: "List Tiles",
+    tag: "Layout",
+    color: "bg-flutter-purple/10 text-flutter-purple border-flutter-purple/20",
+    description: "Versatile list items for displaying information with leading icons, titles, subtitles, and trailing actions.",
+  },
   stepper: {
     name: "Steppers",
     tag: "Navigation",
