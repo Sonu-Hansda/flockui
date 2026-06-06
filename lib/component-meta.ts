@@ -99,6 +99,12 @@ export const componentMeta: Record<
     description:
       "Step progress indicators for guiding users through multi-step processes and workflows.",
   },
+  "search-bar": {
+    name: "Search Bar",
+    tag: "Forms",
+    color: "bg-flutter-blue/10 text-flutter-blue border-flutter-blue/20",
+    description: "An animated search bar with real-time filtering, results dropdown, and smooth interactions.",
+  },
 };
 
 export type ComponentMetaEntry = (typeof componentMeta)[keyof typeof componentMeta];
