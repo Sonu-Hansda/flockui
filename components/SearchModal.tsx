@@ -10,6 +10,9 @@ import { componentMeta } from "@/lib/component-meta";
 const componentLinks = Object.entries(componentMeta).map(([slug, meta]) => ({
   label: meta.name,
   href: `/components/${slug}`,
+  slug,
+  description: meta.description,
+  tag: meta.tag,
   category: "Components",
 }));
 
@@ -28,10 +31,16 @@ export default function SearchModal() {
   useEffect(() => { setMounted(true); }, []);
 
   const filtered = query.trim()
-    ? links.filter((l) =>
-        l.label.toLowerCase().includes(query.toLowerCase()) ||
-        l.category.toLowerCase().includes(query.toLowerCase())
-      )
+    ? links.filter((l) => {
+        const q = query.toLowerCase();
+        return (
+          l.label.toLowerCase().includes(q) ||
+          l.category.toLowerCase().includes(q) ||
+          ("slug" in l && (l as typeof componentLinks[number]).slug.toLowerCase().includes(q)) ||
+          ("description" in l && (l as typeof componentLinks[number]).description.toLowerCase().includes(q)) ||
+          ("tag" in l && (l as typeof componentLinks[number]).tag.toLowerCase().includes(q))
+        );
+      })
     : links;
 
   const handleOpen = useCallback(() => {
@@ -89,10 +98,17 @@ export default function SearchModal() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 transition-colors group"
+                className="flex items-center justify-between gap-3 px-4 py-2.5 hover:bg-slate-50 transition-colors group"
               >
-                <span className="text-sm font-medium text-slate-700 group-hover:text-flutter-blue ">{item.label}</span>
-                <span className="text-xs text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full">{item.category}</span>
+                <div className="flex flex-col min-w-0">
+                  <span className="text-sm font-medium text-slate-700 group-hover:text-flutter-blue truncate">{item.label}</span>
+                  {"description" in item && (
+                    <span className="text-xs text-slate-400 truncate mt-0.5">{(item as typeof componentLinks[number]).description}</span>
+                  )}
+                </div>
+                <span className="text-xs text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full shrink-0">
+                  {"tag" in item ? (item as typeof componentLinks[number]).tag : item.category}
+                </span>
               </Link>
             ))
           )}
