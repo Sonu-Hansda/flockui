@@ -2,6 +2,8 @@ import { Check, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import DocsSidebar from "@/components/docs/DocsSidebar";
 import type { Metadata } from 'next';
+import JsonLd from "@/components/JsonLd";
+import { howToJsonLd } from "@/lib/json-ld";
 
 export const metadata: Metadata = {
   title: "Documentation | FlockUI",
@@ -32,71 +34,98 @@ class FlockButton extends StatelessWidget {
 
 export default function DocsPage() {
   return (
-    <div className="min-h-screen bg-white transition-colors duration-200">
-      <div className="border-b border-slate-100 bg-slate-50 py-10">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="text-xs font-bold uppercase tracking-widest text-flutter-blue mb-2">Documentation</p>
-          <h1 className="text-4xl font-extrabold text-slate-900 ">Getting Started</h1>
-        </div>
-      </div>
-
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 flex flex-col gap-10 md:flex-row">
-        <DocsSidebar />
-
-        <div className="flex-1 min-w-0 max-w-3xl">
-          <h2 className="text-2xl font-extrabold text-slate-900 mb-4">Introduction</h2>
-          <p className="text-base text-slate-600 leading-relaxed mb-6">
-            Welcome to FlockUI — the open-source Flutter UI component library. Our goal is simple: give developers pre-built, beautiful Flutter widgets they can copy directly into their codebase.
-          </p>
-
-          <h3 className="text-lg font-bold text-slate-900 mb-3">Why copy-paste?</h3>
-          <p className="text-base text-slate-600 leading-relaxed mb-4">
-            Traditional UI libraries require you to install a package and live with its API forever. FlockUI gives you the source code — you own it, you customize it.
-          </p>
-
-          <ul className="space-y-2 mb-8">
-            {[
-              { label: "Zero Dependencies", desc: "Nothing to install or update." },
-              { label: "Full Control", desc: "Modify any part of the widget to your needs." },
-              { label: "Framework-native", desc: "Pure Flutter and Dart — no wrappers." },
-            ].map((item) => (
-              <li key={item.label} className="flex items-start gap-3 rounded-xl border border-slate-100 bg-slate-50 px-4 py-3">
-                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-flutter-blue/10 text-flutter-blue ">
-                  <Check className="h-3 w-3" />
-                </span>
-                <span className="text-sm text-slate-700 "><strong className="font-semibold text-slate-900 ">{item.label}:</strong> {item.desc}</span>
-              </li>
-            ))}
-          </ul>
-
-          <h3 className="text-lg font-bold text-slate-900 mb-3">Quick Start</h3>
-          <p className="text-sm text-slate-500 mb-3">Find a component, copy the code, drop it into your project.</p>
-
-          <div className="relative rounded-xl border border-slate-200 bg-slate-900 overflow-hidden">
-            <div className="flex items-center justify-between border-b border-slate-700/50 px-4 py-2.5">
-              <span className="text-xs font-mono text-slate-400">example_button.dart</span>
-              <span className="text-xs text-slate-500">Dart</span>
-            </div>
-            <pre className="overflow-x-auto px-5 py-4 text-sm leading-relaxed text-slate-200 font-mono">
-              <code>{codeSnippet}</code>
-            </pre>
+    <>
+      <JsonLd
+        id="howto-schema"
+        json={howToJsonLd([
+          {
+            name: "Browse Components",
+            text: "Visit the Components page and browse through the available Flutter UI components like buttons, cards, toasts, and more.",
+          },
+          {
+            name: "Preview the Component",
+            text: "Click on any component to see a live preview and explore its different variants.",
+          },
+          {
+            name: "Copy the Source Code",
+            text: "Click the copy button on any variant to grab the complete Dart source code.",
+          },
+          {
+            name: "Paste Into Your Project",
+            text: "Create a new Dart file in your Flutter project and paste the copied code. No additional packages or dependencies needed.",
+          },
+          {
+            name: "Customize as Needed",
+            text: "Since you own the code, you can modify colors, sizes, and behavior to match your app's design perfectly.",
+          },
+        ])}
+      />
+      <div className="min-h-screen bg-white transition-colors duration-200">
+        <div className="border-b border-slate-100 bg-slate-50 py-10">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <p className="text-xs font-bold uppercase tracking-widest text-flutter-blue mb-2">Documentation</p>
+            <h1 className="text-4xl font-extrabold text-slate-900 ">Getting Started</h1>
           </div>
+        </div>
 
-          {/* Contributing section */}
-          <div className="mt-12 rounded-2xl border border-flutter-blue/20 bg-flutter-blue/5 p-6">
-            <h3 className="text-lg font-bold text-slate-900 mb-2">Want to Contribute?</h3>
-            <p className="text-sm text-slate-600 leading-relaxed mb-4">
-              FlockUI is open source and we welcome contributions from the community. Whether it's a new component, a bug fix, or a documentation improvement — every contribution helps.
+        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 flex flex-col gap-10 md:flex-row">
+          <DocsSidebar />
+
+          <div className="flex-1 min-w-0 max-w-3xl">
+            <h2 className="text-2xl font-extrabold text-slate-900 mb-4">Introduction</h2>
+            <p className="text-base text-slate-600 leading-relaxed mb-6">
+              Welcome to FlockUI — the open-source Flutter UI component library. Our goal is simple: give developers pre-built, beautiful Flutter widgets they can copy directly into their codebase.
             </p>
-            <Link
-              href="/docs/contribution"
-              className="inline-flex items-center gap-2 rounded-lg bg-flutter-blue text-white px-5 py-2.5 text-sm font-semibold hover:opacity-90 transition-opacity"
-            >
-              Read the Contribution Guide <ExternalLink className="h-4 w-4" />
-            </Link>
+
+            <h3 className="text-lg font-bold text-slate-900 mb-3">Why copy-paste?</h3>
+            <p className="text-base text-slate-600 leading-relaxed mb-4">
+              Traditional UI libraries require you to install a package and live with its API forever. FlockUI gives you the source code — you own it, you customize it.
+            </p>
+
+            <ul className="space-y-2 mb-8">
+              {[
+                { label: "Zero Dependencies", desc: "Nothing to install or update." },
+                { label: "Full Control", desc: "Modify any part of the widget to your needs." },
+                { label: "Framework-native", desc: "Pure Flutter and Dart — no wrappers." },
+              ].map((item) => (
+                <li key={item.label} className="flex items-start gap-3 rounded-xl border border-slate-100 bg-slate-50 px-4 py-3">
+                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-flutter-blue/10 text-flutter-blue ">
+                    <Check className="h-3 w-3" />
+                  </span>
+                  <span className="text-sm text-slate-700 "><strong className="font-semibold text-slate-900 ">{item.label}:</strong> {item.desc}</span>
+                </li>
+              ))}
+            </ul>
+
+            <h3 className="text-lg font-bold text-slate-900 mb-3">Quick Start</h3>
+            <p className="text-sm text-slate-500 mb-3">Find a component, copy the code, drop it into your project.</p>
+
+            <div className="relative rounded-xl border border-slate-200 bg-slate-900 overflow-hidden">
+              <div className="flex items-center justify-between border-b border-slate-700/50 px-4 py-2.5">
+                <span className="text-xs font-mono text-slate-400">example_button.dart</span>
+                <span className="text-xs text-slate-500">Dart</span>
+              </div>
+              <pre className="overflow-x-auto px-5 py-4 text-sm leading-relaxed text-slate-200 font-mono">
+                <code>{codeSnippet}</code>
+              </pre>
+            </div>
+
+            {/* Contributing section */}
+            <div className="mt-12 rounded-2xl border border-flutter-blue/20 bg-flutter-blue/5 p-6">
+              <h3 className="text-lg font-bold text-slate-900 mb-2">Want to Contribute?</h3>
+              <p className="text-sm text-slate-600 leading-relaxed mb-4">
+                FlockUI is open source and we welcome contributions from the community. Whether it's a new component, a bug fix, or a documentation improvement — every contribution helps.
+              </p>
+              <Link
+                href="/docs/contribution"
+                className="inline-flex items-center gap-2 rounded-lg bg-flutter-blue text-white px-5 py-2.5 text-sm font-semibold hover:opacity-90 transition-opacity"
+              >
+                Read the Contribution Guide <ExternalLink className="h-4 w-4" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

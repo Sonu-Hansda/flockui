@@ -35,6 +35,7 @@ export default function CtaSection() {
             width={200}
             height={200}
             className="w-auto h-auto"
+            loading="lazy"
           />
         </div>
 
@@ -46,6 +47,7 @@ export default function CtaSection() {
             width={360}
             height={360}
             className="w-auto h-auto"
+            loading="lazy"
           />
         </div>
       </div>

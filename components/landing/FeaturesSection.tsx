@@ -93,6 +93,7 @@ export default function FeaturesSection() {
                       width={800}
                       height={300}
                       className="w-full h-auto object-cover"
+                      loading="lazy"
                     />
                   </div>
 

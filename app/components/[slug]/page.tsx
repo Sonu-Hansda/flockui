@@ -6,6 +6,9 @@ import { getComponentCode } from '@/lib/get-component-code'
 import { componentMeta } from '@/lib/component-meta'
 import ComponentPageClient from './ComponentPageClient'
 import type { Metadata } from 'next';
+import Breadcrumbs from '@/components/Breadcrumbs';
+import JsonLd from '@/components/JsonLd';
+import { softwareSourceCodeJsonLd } from '@/lib/json-ld';
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -14,6 +17,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${name} | FlockUI`,
     description: meta?.description ?? `${name} Flutter UI component — preview, copy, and paste into your project.`,
+    alternates: {
+      canonical: `/components/${slug}`,
+    },
   };
 }
 
@@ -49,10 +55,22 @@ export default async function ComponentPage({ params }: { params: Promise<{ slug
     }))
 
     return (
-        <ComponentPageClient
-            slug={slug}
-            meta={meta}
-            variantData={variantData}
-        />
+        <>
+            <div className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
+                <Breadcrumbs items={[
+                    { name: 'Components', href: '/components' },
+                    { name: meta.name, href: `/components/${slug}` },
+                ]} />
+            </div>
+            <JsonLd
+                id="component-schema"
+                json={softwareSourceCodeJsonLd(meta.name, meta.description, slug)}
+            />
+            <ComponentPageClient
+                slug={slug}
+                meta={meta}
+                variantData={variantData}
+            />
+        </>
     )
 }
